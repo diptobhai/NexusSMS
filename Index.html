@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nexus SMS · SMS Blaster</title>
+    <meta name="description" content="Enterprise-grade SMS testing tool." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        :root {
+            --bg-primary: #0b0f1a;
+            --bg-secondary: #111827;
+            --bg-card: rgba(17, 24, 39, 0.80);
+            --bg-card-hover: rgba(31, 41, 55, 0.85);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border-color: rgba(56, 189, 248, 0.18);
+            --border-glow: rgba(56, 189, 248, 0.35);
+            --accent-cyan: #38bdf8;
+            --accent-purple: #a78bfa;
+            --accent-pink: #f472b6;
+            --accent-green: #34d399;
+            --accent-orange: #fb923c;
+            --accent-red: #f87171;
+            --shadow-card: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+            --radius-card: 28px;
+            --radius-sm: 12px;
+            --radius-full: 9999px;
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --font: 'Inter', system-ui, -apple-system, sans-serif;
+            --max-width: 1200px;
+            --header-height: 72px;
+            --glow-cyan: 0 0 30px rgba(56, 189, 248, 0.15);
+            --glow-purple: 0 0 30px rgba(167, 139, 250, 0.12);
+        }
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+        body {
+            font-family: var(--font);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+            transition: background var(--transition), color var(--transition);
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-cyan);
+            border-radius: var(--radius-full);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-purple);
+        }
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        .flex {
+            display: flex;
+        }
+        .items-center {
+            align-items: center;
+        }
+        .justify-between {
+            justify-content: space-between;
+        }
+        .gap-2 {
+            gap: 16px;
+        }
+        .w-full {
+            width: 100%;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 14px;
+            border-radius: var(--radius-full);
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            background: rgba(56, 189, 248, 0.12);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(56, 189, 248, 0.20);
+        }
+        .badge-green {
+            background: rgba(52, 211, 153, 0.12);
+            color: var(--accent-green);
+            border-color: rgba(52, 211, 153, 0.20);
+        }
+        .glass {
+            background: var(--bg-card);
+            backdrop-filter: blur(16px) saturate(1.4);
+            -webkit-backdrop-filter: blur(16px) saturate(1.4);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-card);
+            box-shadow: var(--shadow-card), var(--glow-cyan);
+            transition: all var(--transition);
+        }
+        .glass:hover {
+            border-color: var(--border-glow);
+            box-shadow: var(--shadow-card), var(--glow-cyan), var(--glow-purple);
+        }
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(11, 15, 26, 0.72);
+            backdrop-filter: blur(20px) saturate(1.6);
+            -webkit-backdrop-filter: blur(20px) saturate(1.6);
+            border-bottom: 1px solid var(--border-color);
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            transition: background var(--transition);
+        }
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 1.3rem;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #fff;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.25);
+        }
+        .logo span {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--transition);
+            font-size: 1rem;
+        }
+        .theme-toggle:hover {
+            background: rgba(56, 189, 248, 0.10);
+            border-color: var(--accent-cyan);
+            color: var(--text-primary);
+        }
+        .main-content {
+            padding: 32px 0 64px;
+            min-height: calc(100vh - var(--header-height));
+        }
+        .sender-card {
+            padding: 32px 28px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .sender-card .card-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .sender-card .card-sub {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+        .form-group label i {
+            color: var(--accent-cyan);
+            width: 18px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 14px 18px;
+            font-size: 0.95rem;
+            font-family: var(--font);
+            background: rgba(0, 0, 0, 0.45);
+            border: 1.5px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            transition: all var(--transition);
+            outline: none;
+        }
+        .form-control:focus {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.12);
+        }
+        .form-control::placeholder {
+            color: var(--text-muted);
+        }
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 28px;
+            font-family: var(--font);
+            font-weight: 700;
+            font-size: 0.95rem;
+            border: none;
+            border-radius: var(--radius-sm);
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            color: #fff;
+            cursor: pointer;
+            transition: all var(--transition);
+            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.25);
+            width: 100%;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(56, 189, 248, 0.35);
+        }
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        .btn-primary .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        .log-terminal {
+            margin-top: 24px;
+            background: rgba(0, 0, 0, 0.55);
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+        .log-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 16px;
+            background: rgba(0, 0, 0, 0.30);
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+        }
+        .log-header .log-actions {
+            display: flex;
+            gap: 8px;
+        }
+        .log-header .log-actions button {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: color var(--transition);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+        .log-header .log-actions button:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        #log {
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.75rem;
+            padding: 14px 16px;
+            max-height: 240px;
+            min-height: 120px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+            line-height: 1.7;
+            color: #b0e0e6;
+        }
+        #log .log-success {
+            color: var(--accent-green);
+        }
+        #log .log-error {
+            color: var(--accent-red);
+        }
+        #log .log-info {
+            color: var(--accent-cyan);
+        }
+        #log .log-warn {
+            color: var(--accent-orange);
+        }
+        .toast-container {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 380px;
+            width: 100%;
+        }
+        .toast {
+            padding: 14px 20px;
+            border-radius: var(--radius-sm);
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-card);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: slideIn 0.3s ease;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        .toast i {
+            font-size: 1.1rem;
+        }
+        .toast-success {
+            border-left: 4px solid var(--accent-green);
+        }
+        .toast-success i {
+            color: var(--accent-green);
+        }
+        .toast-error {
+            border-left: 4px solid var(--accent-red);
+        }
+        .toast-error i {
+            color: var(--accent-red);
+        }
+        .toast-info {
+            border-left: 4px solid var(--accent-cyan);
+        }
+        .toast-info i {
+            color: var(--accent-cyan);
+        }
+        .toast-warning {
+            border-left: 4px solid var(--accent-orange);
+        }
+        .toast-warning i {
+            color: var(--accent-orange);
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        @media (max-width: 640px) {
+            .container {
+                padding: 0 16px;
+            }
+            .sender-card {
+                padding: 24px 18px;
+            }
+            .logo {
+                font-size: 1rem;
+            }
+            .logo-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+            }
+        }
+        body.light {
+            --bg-primary: #f0f4f8;
+            --bg-secondary: #e2e8f0;
+            --bg-card: rgba(255, 255, 255, 0.78);
+            --bg-card-hover: rgba(255, 255, 255, 0.92);
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --text-muted: #94a3b8;
+            --border-color: rgba(56, 189, 248, 0.25);
+            --shadow-card: 0 25px 50px -12px rgba(0, 0, 0, 0.10);
+        }
+        body.light .header {
+            background: rgba(255, 255, 255, 0.70);
+            border-bottom-color: rgba(56, 189, 248, 0.20);
+        }
+        body.light .form-control {
+            background: rgba(255, 255, 255, 0.70);
+            color: var(--text-primary);
+        }
+        body.light .log-terminal {
+            background: rgba(255, 255, 255, 0.50);
+        }
+        body.light #log {
+            color: #1a2a3a;
+        }
+        body.light .glass {
+            background: var(--bg-card);
+        }
+        body.light .toast {
+            background: rgba(255, 255, 255, 0.92);
+        }
+
+        /* Telegram owner section */
+        .owner-section {
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .owner-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color var(--transition);
+            padding: 6px 16px;
+            border-radius: var(--radius-full);
+            background: rgba(255,255,255,0.03);
+            border: 1px solid transparent;
+        }
+        .owner-section a:hover {
+            color: var(--accent-cyan);
+            border-color: var(--border-glow);
+            background: rgba(56, 189, 248, 0.06);
+        }
+        .owner-section a i {
+            font-size: 1.4rem;
+            color: #26A5E4; /* Telegram brand color */
+        }
+        .owner-section .owner-label {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <header class="header" role="banner">
+        <div class="container header-inner">
+            <a href="#" class="logo" aria-label="Nexus SMS">
+                <span class="logo-icon"><i class="fas fa-bolt"></i></span>
+                <span>Nexus</span><span style="-webkit-text-fill-color:var(--text-primary);">SMS</span>
+            </a>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content" role="main">
+        <div class="container">
+            <section class="glass sender-card" aria-label="SMS sender">
+                <div class="card-title">
+                    <i class="fas fa-rocket" style="color:var(--accent-cyan);"></i>
+                    SMS Blaster
+                    <span class="badge badge-green" style="margin-left:auto;">
+                        <i class="fas fa-circle" style="font-size:0.5rem;"></i> Live
+                    </span>
+                </div>
+                <p class="card-sub">Unlimited SMS Bombing · <span class="text-muted">v1.0</span></p>
+
+                <div class="form-group">
+                    <label for="phone"><i class="fas fa-mobile-alt"></i> Target Number</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="+8801xxxxxxxx" autocomplete="tel" />
+                </div>
+
+                <div class="form-group">
+                    <label for="count"><i class="fas fa-bomb"></i> ATTACK AMOUNT (MAX 100)</label>
+                    <input type="number" id="count" class="form-control" placeholder="Requests" min="1" max="100" value="5" />
+                </div>
+
+                <button class="btn-primary" id="sendBtn" onclick="startBlast()">
+                    <i class="fas fa-skull-crossbones"></i>
+                    <span id="sendBtnText">🚀 Launch Attack</span>
+                </button>
+
+                <div class="log-terminal">
+                    <div class="log-header">
+                        <span><i class="fas fa-terminal"></i> Console</span>
+                        <div class="log-actions">
+                            <button onclick="clearLog()" title="Clear log"><i class="fas fa-eraser"></i></button>
+                        </div>
+                    </div>
+                    <div id="log">[🟢] System ready · Nexus SMS V1.0<br />[⚡] Enter target &amp; fire.</div>
+                </div>
+
+                <!-- Telegram Owner Section -->
+                <div class="owner-section">
+                    <span class="owner-label">Contact Info</span>
+                    <a href="https://t.me/CallMessageBomber" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-telegram-plane" style="font-size: 25px;"></i>
+                        <span>@SMS BOMBER</span>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div class="toast-container" id="toastContainer" role="status" aria-live="polite"></div>
+
+    <script>
+        // ----- SECURITY: BLOCK DEV TOOLS & CONTEXT MENU -----
+        (function() {
+            // Prevent right-click
+            document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+            // Block common keyboard shortcuts for dev tools
+            document.addEventListener('keydown', function(e) {
+                // F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C, Ctrl+U
+                if (e.key === 'F12' ||
+                    (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
+                    (e.ctrlKey && e.key === 'U')) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+
+            // Detect DevTools opening (via element inspection)
+            // This is a simple approach: check window.outerHeight/outerWidth difference
+            // but it's not 100% reliable. We'll add a basic check.
+            let devtools = /./;
+            devtools.toString = function() {
+                // If devtools is open, this function gets called
+                // We can trigger a redirect or clear the page
+                // For simplicity, we just reload the page (annoying for attackers)
+                // Uncomment the next line if you want aggressive protection:
+                // window.location.reload();
+            };
+            // Another detection method: using console.log with a getter
+            // Not used to avoid breaking normal console usage.
+
+            // Override console methods to prevent easy logging of sensitive data
+            // (optional, but we keep it simple)
+            // We won't override console to keep debugging possible for us.
+        })();
+
+        // ----- DOM REFS -----
+        const $ = (s) => document.querySelector(s);
+        const dom = {
+            phone: $('#phone'),
+            count: $('#count'),
+            sendBtn: $('#sendBtn'),
+            sendBtnText: $('#sendBtnText'),
+            log: $('#log'),
+            themeToggle: $('#themeToggle'),
+            themeIcon: $('#themeIcon'),
+            toastContainer: $('#toastContainer'),
+        };
+
+        let isSending = false;
+
+        // ----- TOAST & LOG HELPERS -----
+        function showToast(message, type = 'info', duration = 4000) {
+            const container = dom.toastContainer;
+            const toast = document.createElement('div');
+            const icons = {
+                success: 'fa-check-circle',
+                error: 'fa-exclamation-circle',
+                warning: 'fa-triangle-exclamation',
+                info: 'fa-circle-info',
+            };
+            toast.className = `toast toast-${type}`;
+            toast.innerHTML = `<i class="fas ${icons[type] || icons.info}"></i> ${message}`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(30px)';
+                setTimeout(() => toast.remove(), 300);
+            }, duration);
+        }
+
+        function timeStamp() {
+            return new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        }
+
+        function appendLog(message, type = 'info') {
+            const logEl = dom.log;
+            const ts = timeStamp();
+            const iconMap = { success: '✅', error: '❌', warn: '⚠️', info: '💠' };
+            const clsMap = { success: 'log-success', error: 'log-error', warn: 'log-warn', info: 'log-info' };
+            const icon = iconMap[type] || '💠';
+            const cls = clsMap[type] || 'log-info';
+            const line = `<span class="${cls}">[${ts}] ${icon} ${message}</span>`;
+            logEl.innerHTML += line + '\n';
+            logEl.scrollTop = logEl.scrollHeight;
+            if (logEl.innerHTML.length > 12000) {
+                const lines = logEl.innerHTML.split('\n');
+                if (lines.length > 300) logEl.innerHTML = lines.slice(-200).join('\n');
+            }
+        }
+
+        function clearLog() {
+            dom.log.innerHTML = '[🧹] Log cleared · ready for action.\n';
+            appendLog('Console reset', 'info');
+        }
+
+        // ----- SECURE API CONFIG (Base64 Encoded) -----
+        // Original: https://ampos-api-1.onrender.com/
+        // Original key: SuSHiLx2024SMS
+        const _base64Url = 'aHR0cHM6Ly9hbXBvcy1hcGktMS5vbnJlbmRlci5jb20v'; // base64 of the URL
+        const _base64Key = 'U3VTSGlMeDIwMjRTTVM='; // base64 of the key
+
+        function decodeBase64(str) {
+            try {
+                return atob(str);
+            } catch (e) {
+                return str;
+            }
+        }
+
+        // ----- START BLAST (UPDATED WITH SPEED & SECURE API) -----
+        async function startBlast() {
+            if (isSending) {
+                showToast('Already running a blast!', 'warning');
+                return;
+            }
+            const phone = dom.phone.value.trim();
+            const count = parseInt(dom.count.value) || 0;
+            if (!phone) {
+                showToast('Please enter a target number.', 'error');
+                dom.phone.focus();
+                return;
+            }
+            if (count < 1 || count > 100) {
+                showToast('Payload must be between 1 and 100.', 'error');
+                dom.count.focus();
+                return;
+            }
+            // Format number: add +88 if needed
+            let formatted = phone;
+            if (!formatted.startsWith('+88')) {
+                if (formatted.startsWith('0')) formatted = '+88' + formatted;
+                else if (!formatted.startsWith('+')) formatted = '+88' + formatted;
+            }
+
+            isSending = true;
+            const btn = dom.sendBtn;
+            const originalText = dom.sendBtnText.innerHTML;
+            btn.disabled = true;
+            dom.sendBtnText.innerHTML = '<span class="spinner"></span> START BOMBING WAIT 10s...';
+
+            appendLog(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`, 'info');
+            appendLog(`🎯 Target: ${formatted} · ${count} rounds`, 'info');
+            appendLog(`🌐 API: ampos-api-1.onrender.com (secured)`, 'info');
+
+            let successCount = 0;
+            let errorCount = 0;
+
+            // Decode API URL and Key
+            const baseUrl = decodeBase64(_base64Url);
+            const apiKey = decodeBase64(_base64Key);
+
+            for (let i = 1; i <= count; i++) {
+                try {
+                    // Build query parameters
+                    const params = new URLSearchParams({
+                        phone: formatted,
+                        rounds: count,        // or i if you want incremental
+                        key: apiKey
+                    });
+                    const url = `${baseUrl}?${params.toString()}`;
+
+                    // Optional: if you face CORS issues, uncomment the proxy line below
+                    // const proxy = 'https://corsproxy.io/?';
+                    // const url = proxy + encodeURIComponent(`${baseUrl}?${params.toString()}`);
+
+                    const resp = await fetch(url, {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    const text = await resp.text();
+                    const short = text.length > 60 ? text.substring(0, 60) + '…' : text;
+
+                    if (resp.ok) {
+                        successCount++;
+                        appendLog(`✅ [${i}/${count}] Hit · ${resp.status} → ${short}`, 'success');
+                    } else {
+                        errorCount++;
+                        appendLog(`⚠️ [${i}/${count}] Miss · ${resp.status} → ${short}`, 'error');
+                    }
+                } catch (err) {
+                    errorCount++;
+                    appendLog(`💀 [${i}/${count}] Network fail · ${err.message.substring(0, 50)}`, 'error');
+                }
+                // --- SPEED IMPROVEMENT: reduced delay from 480-600ms to 100ms ---
+                await new Promise(r => setTimeout(r, 100));
+            }
+
+            appendLog(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`, 'info');
+            if (successCount > 0) {
+                appendLog(`🏆 Blast complete! ✅ ${successCount} · ❌ ${errorCount}`, 'success');
+                showToast(`Blast finished: ${successCount} successful`, 'success', 3000);
+            } else {
+                appendLog(`💔 All ${errorCount} requests failed.`, 'error');
+                showToast('Blast failed entirely.', 'error', 3000);
+            }
+
+            isSending = false;
+            btn.disabled = false;
+            dom.sendBtnText.innerHTML = originalText;
+        }
+
+        // ----- THEME TOGGLE -----
+        function toggleTheme() {
+            const body = document.body;
+            const isLight = body.classList.toggle('light');
+            dom.themeIcon.className = isLight ? 'fas fa-sun' : 'fas fa-moon';
+            localStorage.setItem('nexus_theme', isLight ? 'light' : 'dark');
+        }
+
+        function loadTheme() {
+            const theme = localStorage.getItem('nexus_theme');
+            if (theme === 'light') {
+                document.body.classList.add('light');
+                dom.themeIcon.className = 'fas fa-sun';
+            } else {
+                dom.themeIcon.className = 'fas fa-moon';
+            }
+        }
+
+        // ----- INIT -----
+        function init() {
+            loadTheme();
+            if (!dom.count.value) dom.count.value = '5';
+            dom.themeToggle.addEventListener('click', toggleTheme);
+            dom.phone.addEventListener('keydown', (e) => { if (e.key === 'Enter') dom.count.focus(); });
+            dom.count.addEventListener('keydown', (e) => { if (e.key === 'Enter') startBlast(); });
+            appendLog('🚀 Nexus SMS V1.0 initialized · ' + new Date().toLocaleString(), 'success');
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+
+        // Expose functions globally
+        window.startBlast = startBlast;
+        window.clearLog = clearLog;
+        window.showToast = showToast;
+        window.toggleTheme = toggleTheme;
+    </script>
+</body>
+</html>
